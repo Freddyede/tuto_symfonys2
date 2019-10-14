@@ -11,9 +11,7 @@ class HomeController extends AbstractController {
      * @Route("/", name="home")
      */
     public function index() {
-        $users = $this->getDoctrine()->getRepository(User::class)->findAll();
         return $this->render('home/index.html.twig', [
-            'users'=>$users,
         ]);
     }
 }
