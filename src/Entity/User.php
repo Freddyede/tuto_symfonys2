@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Entity;
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -32,8 +31,7 @@ class User
      * @ORM\Column(type="text")
      */
     private $email;
-
-    /**
+/**
      * @ORM\OneToMany(targetEntity="App\Entity\Produit", mappedBy="user")
      */
     private $produits;
@@ -44,7 +42,6 @@ class User
         $this->produits_id = new ArrayCollection();
         $this->produits = new ArrayCollection();
     }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -82,7 +79,6 @@ class User
     public function setEmail(string $email): self
     {
         $this->email = $email;
-
         return $this;
     }
 
@@ -113,7 +109,6 @@ class User
                 $produit->setUser(null);
             }
         }
-
         return $this;
     }
 }
