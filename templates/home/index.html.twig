@@ -9,7 +9,14 @@
 <div class="example-wrapper">
     <h1>Tuto symfony :</h1>
     {% for user in users %}
-        {{ user.name }}
+        <div>
+            {{ user.name }}
+        </div>
+        <div>
+            {% for produit in user.produits %}
+                <img src="{{ produit.source }}" alt="{{ produit.alt }}"/>
+            {% endfor %}
+        </div>
     {% endfor %}
 </div>
 {% endblock %}
