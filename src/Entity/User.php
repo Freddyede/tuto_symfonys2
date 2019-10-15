@@ -36,6 +36,11 @@ class User
      */
     private $produits;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Appartements", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $appartements;
+
     public function __construct()
     {
         $this->produces = new ArrayCollection();
@@ -109,6 +114,24 @@ class User
                 $produit->setUser(null);
             }
         }
+        return $this;
+    }
+
+    public function getAppartements(): ?Appartements
+    {
+        return $this->appartements;
+    }
+
+    public function setAppartements(?Appartements $appartements): self
+    {
+        $this->appartements = $appartements;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newUser = $appartements === null ? null : $this;
+        if ($newUser !== $appartements->getUser()) {
+            $appartements->setUser($newUser);
+        }
+
         return $this;
     }
 }

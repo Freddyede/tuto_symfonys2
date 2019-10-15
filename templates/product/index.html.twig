@@ -1,7 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    {{ form_widget(form.price) }}
-    {{ form_widget(form.price) }}
-    {{ form_widget(form.user) }}
+{{ form_start(form) }}
+    <div class="row">
+        {{ form_widget(form.price) }}
+        {{ form_widget(form.source) }}
+    </div>
+    <div class="row">
+        {{ form_widget(form.alt) }}
+        {{ form_widget(form.user) }}
+    </div>
+    <div class="row text-center">
+        {{ form_widget(form.submit) }}
+    </div>
+{{ form_end(form) }}
 {% endblock %}

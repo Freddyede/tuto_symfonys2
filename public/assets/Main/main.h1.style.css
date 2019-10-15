@@ -4,3 +4,6 @@
     width: 95%;
     font: 18px/1.5 sans-serif;
 }
+#img_size{
+    display:block;width:100px;height:100px;
+}

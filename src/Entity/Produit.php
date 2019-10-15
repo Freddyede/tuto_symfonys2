@@ -19,11 +19,6 @@ class Produit
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $price;
-
-    /**
      * @ORM\Column(type="text")
      */
     private $source;
@@ -38,6 +33,11 @@ class Produit
      */
     private $alt;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Price", mappedBy="products", cascade={"persist", "remove"})
+     */
+    private $price;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -46,18 +46,6 @@ class Produit
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getPrice(): ?int
-    {
-        return $this->price;
-    }
-
-    public function setPrice(int $price): self
-    {
-        $this->price = $price;
-
-        return $this;
     }
 
     public function getSource()
@@ -92,6 +80,24 @@ class Produit
     public function setAlt(string $alt): self
     {
         $this->alt = $alt;
+
+        return $this;
+    }
+
+    public function getPrice(): ?Price
+    {
+        return $this->price;
+    }
+
+    public function setPrice(?Price $price): self
+    {
+        $this->price = $price;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newProducts = $price === null ? null : $this;
+        if ($newProducts !== $price->getProducts()) {
+            $price->setProducts($newProducts);
+        }
 
         return $this;
     }

@@ -17,16 +17,30 @@ class ProductFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('price', TextType::class,[
+            ->add('price', IntegerType::class,[
                 'attr'=>[
-                    'placeholder'=>'Price'
+                    'placeholder'=>'Price',
+                    'class'=>'form-control col-6'
                 ]
             ])
-            ->add('source', TextareaType::class)
-            ->add('alt', TextType::class)
+            ->add('source', TextareaType::class,[
+                'attr'=>[
+                    'placeholder'=>'Source image',
+                    'class'=>'form-control col-6'
+                ]
+            ])
+            ->add('alt', TextType::class,[
+                'attr'=>[
+                    'placeholder'=>'Alt image',
+                    'class'=>'form-control col-6'
+                ]
+            ])
             ->add('user', EntityType::class,[
+                'attr'=>[
+                    'class'=>'form-control col-6'
+                ],
                 'class' => User::class,
-                'choice_label'=>'name'
+                'choice_label'=>'name',
             ])
             ->add('submit',SubmitType::class);
     }
