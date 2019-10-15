@@ -4,11 +4,12 @@ namespace App\Form;
 
 use App\Entity\Produit;
 use App\Entity\User;
+use App\Entity\Price;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\{
-    TextType,TextareaType, IntegerType,SubmitType
+    TextType,TextareaType,SubmitType
 };
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
@@ -17,11 +18,12 @@ class ProductFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('price', IntegerType::class,[
+            ->add('price',EntityType::class,[
                 'attr'=>[
-                    'placeholder'=>'Price',
                     'class'=>'form-control col-6'
-                ]
+                ],
+                'class' => Price::class,
+                'choice_label'=>'labelPrix',
             ])
             ->add('source', TextareaType::class,[
                 'attr'=>[
