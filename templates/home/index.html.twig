@@ -7,16 +7,47 @@
 {% endblock %}
 {% block content %}
 <div class="example-wrapper">
-    <h1>Tuto symfony :</h1>
-    {% for user in users %}
-        <div>
-            {{ user.name }}
-        </div>
-        <div>
-            {% for produit in user.produits %}
-                <img src="{{ produit.source }}" alt="{{ produit.alt }}"/>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+            <th  class="text-center" scope="col">id</th>
+            <th  class="text-center" scope="col">Source</th>
+            <th  class="text-center" scope="col">Type</th>
+            <th  class="text-center" scope="col">Prix</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            {% for user in users %}
+                {% for produit in user.produits %}
+                    <td class="text-center"><p>{{ produit.id }}</p></th>
+                    <td class="text-center"><a href="{{ produit.source }}" target="_BLANK">{{ produit.source }}</a></td>
+                    <td class="text-center"><p>{{ produit.price.type }}</p></td>
+                    <td class="text-center"><p>{{produit.price.labelPrix}}</p></td>
+                {% endfor %}
             {% endfor %}
-        </div>
-    {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+            <th  class="text-center" scope="col">id</th>
+            <th  class="text-center" scope="col">Source</th>
+            <th  class="text-center" scope="col">Type</th>
+            <th  class="text-center" scope="col">Prix</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appartement in appartement %}
+            <tr>
+                <td class="text-center"><p>{{ appartement.id }}</p></td>
+                <td class="text-center"><a target="_BLANK" href="{{ appartement.images }}">{{appartement.images }}</a></td>
+                <td class="text-center"><p>{{ appartement.type }}</p></td>
+                <td class="text-center"><p>{{ appartement.price.labelPrix }}</p></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}

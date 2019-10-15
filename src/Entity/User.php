@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Entity;
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -32,11 +31,15 @@ class User
      * @ORM\Column(type="text")
      */
     private $email;
-
-    /**
+/**
      * @ORM\OneToMany(targetEntity="App\Entity\Produit", mappedBy="user")
      */
     private $produits;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Appartements", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $appartements;
 
     public function __construct()
     {
@@ -44,7 +47,6 @@ class User
         $this->produits_id = new ArrayCollection();
         $this->produits = new ArrayCollection();
     }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -82,7 +84,6 @@ class User
     public function setEmail(string $email): self
     {
         $this->email = $email;
-
         return $this;
     }
 
@@ -112,6 +113,23 @@ class User
             if ($produit->getUser() === $this) {
                 $produit->setUser(null);
             }
+        }
+        return $this;
+    }
+
+    public function getAppartements(): ?Appartements
+    {
+        return $this->appartements;
+    }
+
+    public function setAppartements(?Appartements $appartements): self
+    {
+        $this->appartements = $appartements;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newUser = $appartements === null ? null : $this;
+        if ($newUser !== $appartements->getUser()) {
+            $appartements->setUser($newUser);
         }
 
         return $this;
